@@ -1,0 +1,16 @@
+SELECT   t.cname, t.cno, p.pname
+FROM		(SELECT	temp2.cno,temp2.cname,cl.instructor
+			 FROM		(SELECT c.cno, c.cname, temp.term, temp.section
+					 	 FROM	(SELECT cno, term, section FROM schedule WHERE term = 'F10' AND room = 'RCH122') temp ,
+					 	                course c
+					 	 WHERE c.cno=temp.cno) temp2,
+		 				class cl
+		 	WHERE cl.cno = temp2.cno AND cl.term = temp2.term AND cl.section = temp2.section) t,
+			professor p
+WHERE 	p.eid = t.instructor
+ORDER BY t.cno;
+Elementary Algorithm Design and Data Abstraction (advanced version)|CS146|HOLLIS
+Computer Architecture|CS450|BARBARA
+Computer Security and Privacy|CS458|HOLLIS
+Advanced Biochemistry|PHYS442|LILIA
+Research Project|PHYS451|DEBORA

@@ -1,0 +1,18 @@
+SELECT  	 s.sname,t.avg
+FROM		(SELECT 			sno, AVG(mark) AS avg, COUNT(sno) AS num
+			 FROM 				enrollment e
+			 GROUP BY 		sno) t,
+			(SELECT 			sno
+			 FROM 				enrollment e
+			 EXCEPT
+			 SELECT			sno
+			 FROM				enrollment e
+			 WHERE  			mark < 80) t2,
+			 student s
+WHERE	 s.sno = t.sno AND t.sno=t2.sno AND t.num >= 5
+ORDER BY s.sname, t.avg ;
+ANITA, STEVE|84.0
+CHRISTIAN, ROSEMARIE|86.0
+KAREN, BENJAMIN|87.4
+SETH, GERMAINE|82.3333333333333
+SUSIE, VIRGIE|84.0
